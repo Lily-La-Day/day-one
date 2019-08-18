@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const handleChange = (e) => {
     const nodeArray = [...document.querySelectorAll('[class*="new-word-"]')]
     // nodeArray[0,nodeArray.length-1].forEach(node => node.remove())
-    console.log(nodeArray)
+    // console.log(nodeArray)
     const getTextEnd = (textend) => {
       const newword = document.createElement('span')
       if(e.keyCode === 32){
@@ -102,53 +102,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  function  makeArray (newWord)  {
-
-    const words = document.querySelectorAll('.writing')
-
-    // console.log(typeof words)
-    // console.log(words.forEach(word => word.split(' ')))
-    // // words = words.map(word => {
-    // //   word === newWord
-    // // }
-    //
-    // )
-    // console.log('new', words)
-
-  }
-  //
   // function  makeArray (newWord)  {
-  //   console.log(newWord)
-  //   let words = [...document.querySelectorAll('.writing')]
-  //   console.log('mapped', words.map(word => word.childNodes[0].textContent))
-  //   words = words.map(word =>
-  //     console.log('split', word.childNodes[0].textContent)
   //
+  //   const words = document.querySelectorAll('.writing')
   //
-  //   )
-  //   console.log(words)
   //
   //
   // }
-
+  //
 
 
   const changeWord = (text, partOfSpeech) => {
     const old = document.querySelector(`[class*="-${text}"]`)
+    const textArray = text.split('')
+    console.log(textArray)
+    const textEnd = textArray.slice(-3)
+    console.log(textEnd.join(''))
+    const joined = textEnd.join(',')
 
     let newWord = ''
     if (partOfSpeech === 'adjective') {
 
+      newWord = jargon[1].word
+
+    } else if (partOfSpeech === 'noun') {
+
+      newWord = jargon[2].word
+
+    } else if (partOfSpeech === 'preposition') {
+
+      newWord = jargon[3].word
+
+    } else if (partOfSpeech === 'conjunction') {
+
       newWord = jargon[4].word
 
-    } else if (partOfSpeech === 'adjective') {
+    } else if (partOfSpeech === 'adverb') {
+
+      newWord = jargon[5].word
+
+    } else if (partOfSpeech === 'noun')  {
 
       newWord = jargon[6].word
 
     } else newWord = jargon[8].word
     ed.innerText = newWord
     old.innerText = newWord + ' '
-    makeArray(newWord)
+    // makeArray(newWord)
 
 
 
@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       .then((res) => {
         const partOfSpeech = res.data.results[0].partOfSpeech
-
+        console.log(partOfSpeech)
         changeWord(text, partOfSpeech)
       })
       .catch((err => console.log(err)))
